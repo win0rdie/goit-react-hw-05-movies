@@ -1,12 +1,54 @@
-// const URL =
-//     'https://api.themoviedb.org/3/movie/550?api_key=6fc75e32fb0762f3f164fd39db0e559d';
+import axios from 'axios';
 
-// import axios from 'axios';
+export const API_KEY = process.env.REACT_APP_API_KEY;
 
-export const API_KEY = 'ac10d1e55c4d2ca36328b9aab1a704b5';
-export const TRENDING_URL = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
-// axios.defaults.baseURL = process.env.REACT_APP_URL;
+export async function getMovieDetails(movieId) {
+  const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.error('Error getting movie', error);
+    return null;
+  }
+}
 
-// export function fetchData() {
-//   axios.get(`?api_key=${KEY}`);
-// }
+export async function getMoviesTrending() {
+  const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.error('Error getting movie trending', error);
+    return null;
+  }
+}
+
+export async function getMovieCredits(movieId) {
+  const url = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}`;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.error('Error getting movie credits', error);
+    return null;
+  }
+}
+
+export async function getMovieReviews(movieId) {
+  const url = `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${API_KEY}`;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.error('Error getting movie reviews', error);
+    return null;
+  }
+}
+
+export const searchMovies = async query => {
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`;
+
+  const response = await axios.get(url);
+  return response.data.results;
+};
