@@ -1,8 +1,8 @@
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { searchMovies } from 'api/defaultApi';
 import Form from 'components/Form/Form';
 
-import { useEffect, useMemo, useState } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { getYear } from 'assets/getYear';
 
 export function Movies() {

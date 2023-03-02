@@ -5,6 +5,7 @@ import Cast from 'pages/Cast/Cast';
 import Reviews from 'components/Reviews/Reviews';
 import { getYear } from 'assets/getYear';
 import DEFAULT_POSTER from '../../assets/images/default-movie.jpg';
+import { TiArrowBack } from 'react-icons/ti';
 
 import {
   GenreList,
@@ -20,15 +21,22 @@ import {
 export default function MovieDetails() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const [previousPage, setPreviousPage] = useState(null);
   const location = useLocation();
+  const backLink = location.state?.from ?? '/';
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
       const detailsMovie = await getMovieDetails(movieId);
       setMovie(detailsMovie);
     };
-    fetchMovieDetails(movieId);
+    fetchMovieDetails();
   }, [movieId]);
+
+  useEffect(() => {
+    setPreviousPage(backLink);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!movie) {
     return <p>Loading...</p>;
@@ -36,8 +44,7 @@ export default function MovieDetails() {
 
   return (
     <>
-      {/* <Link to="/"> Back to movies</Link> */}
-      <Link to={location.state.from}> Back to movies </Link>
+      <Link to={previousPage}>{<TiArrowBack size={40} />}</Link>
 
       <MovieContainer>
         {movie.poster_path !== null ? (
