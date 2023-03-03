@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 
+export const MovieContainerCast = styled.div`
+  padding: 10px 50px;
+  margin-bottom: 20px;
+`;
+
 export const StyledHeading = styled.h2`
-  /* font-size: 2rem;
+  font-size: 1.5rem;
   color: #333;
-  text-align: center; */
+  text-align: center;
 `;
 
 export const StyledList = styled.ul`
-  /* list-style-type: none;
-  margin: 0;
-  padding: 0; */
   list-style: none;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -19,9 +21,6 @@ export const StyledList = styled.ul`
 `;
 
 export const StyledListItem = styled.li`
-  /* display: flex;
-  align-items: center;
-  margin-bottom: 10px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -35,10 +34,6 @@ export const StyledListItem = styled.li`
 `;
 
 export const StyledImage = styled.img`
-  /* max-width: 100%;
-  height: auto;
-  margin-right: 10px;
-  border-radius: 50%; */
   width: 100%;
   height: 200px;
   /* height: 100%; */

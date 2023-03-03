@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { getMovieDetails } from 'api/defaultApi';
-import { Link, Route, Routes, useLocation, useParams } from 'react-router-dom';
-import Cast from 'pages/Cast/Cast';
+import { Route, Routes, useLocation, useParams } from 'react-router-dom';
+import { TiArrowBack } from 'react-icons/ti';
+
+import Cast from 'components/Cast/Cast';
 import Reviews from 'components/Reviews/Reviews';
+import { getMovieDetails } from 'api/defaultApi';
 import { getYear } from 'assets/getYear';
 import DEFAULT_POSTER from '../../assets/images/default-movie.jpg';
-import { TiArrowBack } from 'react-icons/ti';
 
 import {
   GenreList,
@@ -15,7 +16,12 @@ import {
   MovieDetailsContainer,
   MovieOverview,
   MovieTitle,
+  Nav,
+  NavItem,
+  NavList,
   Poster,
+  StyledLink,
+  StyledLinkMovie,
 } from './MovieDetails.styled';
 
 export default function MovieDetails() {
@@ -44,8 +50,9 @@ export default function MovieDetails() {
 
   return (
     <>
-      <Link to={previousPage}>{<TiArrowBack size={40} />}</Link>
-
+      <StyledLinkMovie to={previousPage}>
+        {<TiArrowBack size={40} />}
+      </StyledLinkMovie>
       <MovieContainer>
         {movie.poster_path !== null ? (
           <Poster
@@ -68,22 +75,26 @@ export default function MovieDetails() {
           </GenreList>
           <MovieDetailsBox>
             <MovieDetail> {movie.runtime} min</MovieDetail>
-            <MovieDetail> {movie.vote_average}/10</MovieDetail>
+            <MovieDetail>
+              {' '}
+              {Math.round(movie.vote_average * 10) / 10} / 10
+            </MovieDetail>
             <MovieDetail>{movie.release_date}</MovieDetail>
           </MovieDetailsBox>
         </MovieDetailsContainer>
       </MovieContainer>
-
-      <nav>
-        <ul>
-          <li>
-            <Link to={`/movies/${movieId}/cast`}>Cast</Link>
-          </li>
-          <li>
-            <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
-          </li>
-        </ul>
-      </nav>
+      <MovieContainer>
+        <Nav>
+          <NavList>
+            <NavItem>
+              <StyledLink to="cast">Cast</StyledLink>
+            </NavItem>
+            <NavItem>
+              <StyledLink to="reviews">Reviews</StyledLink>
+            </NavItem>
+          </NavList>
+        </Nav>
+      </MovieContainer>
 
       <Routes>
         <Route path="cast" element={<Cast movieId={movieId} />} />

@@ -1,28 +1,27 @@
 import { Routes, Route } from 'react-router-dom';
-import Trending from 'pages/Trending';
-import { Container, Header, StyledLink } from './App.styled';
+import Trending from 'pages/Trending/Trending';
+import { Container } from './App.styled';
 
-import MovieDetails from './Movies/MovieDetails';
-import { Movies } from 'pages/Movies';
-import Cast from 'pages/Cast/Cast';
+import MovieDetails from './MovieDetails/MovieDetails';
+import Movies from 'pages/Movies/Movies';
+import Cast from 'components/Cast/Cast';
 import Reviews from './Reviews/Reviews';
+import NotFound from './NotFound';
+import SharedLayout from './SharedLayout/SharedLayout';
 
 function App() {
   return (
     <Container>
-      <Header>
-        <nav>
-          <StyledLink to="/">Home</StyledLink>
-          <StyledLink to="/movies">Movies</StyledLink>
-        </nav>
-      </Header>
       <Routes>
-        <Route path="/" element={<Trending />}></Route>
-        <Route path="/movies" element={<Movies />} />
+        <Route path="/" element={<SharedLayout />}>
+          <Route path="/" element={<Trending />}></Route>
+          <Route path="/movies" element={<Movies />} />
+          <Route path="movies/:movieId/*" element={<MovieDetails />}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
+          </Route>
 
-        <Route path="movies/:movieId/*" element={<MovieDetails />}>
-          <Route path="cast" element={<Cast />} />
-          <Route path="reviews" element={<Reviews />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </Container>

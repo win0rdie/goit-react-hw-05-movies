@@ -1,5 +1,11 @@
 import { getMovieReviews } from 'api/defaultApi';
 import { useEffect, useState } from 'react';
+import {
+  MovieContainerReview,
+  StyledHeadingReview,
+  StyledListItemReview,
+  StyledNameReview,
+} from './Reviews.styled';
 
 export default function Reviews({ movieId }) {
   const [reviews, setReviews] = useState([]);
@@ -14,20 +20,20 @@ export default function Reviews({ movieId }) {
   }, [movieId]);
 
   return (
-    <div>
-      <h2>Reviews</h2>
-      <ul>
+    <MovieContainerReview>
+      <StyledHeadingReview>Reviews</StyledHeadingReview>
+      <StyledListItemReview>
         {reviews.length > 0 ? (
           reviews.map(review => (
-            <li key={review.id}>
-              <p>Author: {review.author}</p>
+            <StyledListItemReview key={review.id}>
+              <StyledNameReview>{review.author}</StyledNameReview>
               <p>{review.content}</p>
-            </li>
+            </StyledListItemReview>
           ))
         ) : (
           <li key="no-reviews">No reviews found.</li>
         )}
-      </ul>
-    </div>
+      </StyledListItemReview>
+    </MovieContainerReview>
   );
 }
