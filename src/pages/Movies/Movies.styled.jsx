@@ -23,7 +23,7 @@ export const MovieLink = styled(Link)`
   display: flex;
   align-items: center;
   &:hover {
-    color: #0077ff;
+    color: rgb(45, 88, 13);
   }
 `;
 

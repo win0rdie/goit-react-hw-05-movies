@@ -1,6 +1,7 @@
-import { getMovieCredits } from 'api/defaultApi';
 import { useState, useEffect } from 'react';
-// import DEFAULT_IMG from '../../assets/images/noimage.jpg';
+import PropTypes from 'prop-types';
+import { getMovieCredits } from 'api/defaultApi';
+
 import {
   MovieContainerCast,
   StyledHeading,
@@ -50,26 +51,11 @@ export default function Cast({ movieId }) {
         ) : (
           <li key="no-cast">No cast found.</li>
         )}
-        {/* {cast.map(({ id, name, character, profile_path }, index) => (
-          <StyledListItem key={`${id}-${index}`}>
-            {profile_path ? (
-              <StyledImage
-                src={`https://image.tmdb.org/t/p/w200/${profile_path}`}
-                alt={`${name}'s profile picture`}
-              />
-            ) : (
-              <StyledImage
-                src="https://via.placeholder.com/200x200.png?text=No+Picture"
-                alt="No Picture"
-              />
-            )}
-            <StyledTextActor>
-              <StyledName>{name}</StyledName>
-              <StyledRole>{character}</StyledRole>
-            </StyledTextActor>
-          </StyledListItem>
-        ))} */}
       </StyledList>
     </MovieContainerCast>
   );
 }
+
+Cast.propTypes = {
+  movieId: PropTypes.string.isRequired,
+};

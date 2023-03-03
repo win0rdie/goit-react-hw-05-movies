@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Route, Routes, useLocation, useParams } from 'react-router-dom';
 import { TiArrowBack } from 'react-icons/ti';
 
@@ -36,7 +36,7 @@ export default function MovieDetails() {
       const detailsMovie = await getMovieDetails(movieId);
       setMovie(detailsMovie);
     };
-    fetchMovieDetails();
+    fetchMovieDetails(movieId);
   }, [movieId]);
 
   useEffect(() => {
@@ -96,10 +96,12 @@ export default function MovieDetails() {
         </Nav>
       </MovieContainer>
 
-      <Routes>
-        <Route path="cast" element={<Cast movieId={movieId} />} />
-        <Route path="reviews" element={<Reviews movieId={movieId} />} />
-      </Routes>
+      <Suspense fallback={<div>Loading ...</div>}>
+        <Routes>
+          <Route path="cast" element={<Cast movieId={movieId} />} />
+          <Route path="reviews" element={<Reviews movieId={movieId} />} />
+        </Routes>
+      </Suspense>
     </>
   );
 }

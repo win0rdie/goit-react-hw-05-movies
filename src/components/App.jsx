@@ -1,13 +1,21 @@
+import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Trending from 'pages/Trending/Trending';
 import { Container } from './App.styled';
 
-import MovieDetails from './MovieDetails/MovieDetails';
-import Movies from 'pages/Movies/Movies';
-import Cast from 'components/Cast/Cast';
-import Reviews from './Reviews/Reviews';
+// import SharedLayout from './SharedLayout/SharedLayout';
+// import Trending from 'pages/Trending/Trending';
+// import Movies from 'pages/Movies/Movies';
+// import MovieDetails from './MovieDetails/MovieDetails';
+// import Cast from 'components/Cast/Cast';
+// import Reviews from './Reviews/Reviews';
 import NotFound from './NotFound';
-import SharedLayout from './SharedLayout/SharedLayout';
+
+const SharedLayout = lazy(() => import('./SharedLayout/SharedLayout'));
+const Trending = lazy(() => import('../pages/Trending/Trending'));
+const Movies = lazy(() => import('../pages/Movies/Movies'));
+const MovieDetails = lazy(() => import('./MovieDetails/MovieDetails'));
+const Cast = lazy(() => import('./Cast/Cast'));
+const Reviews = lazy(() => import('./Reviews/Reviews'));
 
 function App() {
   return (
